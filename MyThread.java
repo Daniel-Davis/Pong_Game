@@ -1,6 +1,9 @@
 package Game;
 import java.util.Random;
 
+//test sentence for git push and pull//
+
+
 public class MyThread implements Runnable { // creating my own threads
 	
 	String name; // variable to hold the name of the threads
