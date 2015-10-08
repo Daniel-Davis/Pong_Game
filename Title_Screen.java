@@ -1,8 +1,7 @@
 package Game;
 
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.Timer;
 
 
@@ -20,7 +19,7 @@ public class Title_Screen extends JFrame{
 	//methods//
 	// main //
 	public static void main(String[] args) {
-		DisplayMode dm = new DisplayMode(1900,1200,16,DisplayMode.REFRESH_RATE_UNKNOWN); // creates local displaymode
+		DisplayMode dm = new DisplayMode(1900,1200,16,DisplayMode.REFRESH_RATE_UNKNOWN); // creates local displaymode equal to the size of bg image
 		Title_Screen ts = new Title_Screen(); // creates local title screen
 		ts.run(dm); // runs the screen
 	} // end of main
@@ -35,12 +34,15 @@ public class Title_Screen extends JFrame{
 	
 	// run //
 	public void run(DisplayMode dm) {
+		
 		setBackground(Color.blue); // test background
 		setForeground(Color.yellow); // text front color
 		setFont(new Font("Ariel",Font.PLAIN, 24)); // test font
 		loaded = false; // no images are loaded
-		
 		s = new Screen(); // creates a new instance of screen class
+		play = new Button(); // creates new play button instance
+		exit = new Button(); // creates new exit button instance
+		
 		try{
 			s.setFullScreen(dm, this); // sets it to full screen
 			loadPics(); // loads images for screen
