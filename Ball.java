@@ -11,12 +11,6 @@ public class Ball {
 		ydir=-1;
 		
 		ImageIcon png = new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\.Ball.png");
-		image = png.getImage();
+
 		
 	} // end of constructor
-	
-	
-	
-	
-	
-}// end of Ball class
