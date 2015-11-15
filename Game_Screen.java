@@ -2,7 +2,10 @@ package Game;
 
 //Imports//
 import java.awt.*;
+import java.io.File;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import java.util.Timer;
@@ -33,8 +36,8 @@ public class Game_Screen {
 	//Score//
 	long score = getScore(); // int to hold score value
 	JLabel scoreL = new JLabel(); // label to display score
-	scoreL.setText(String.valueOf(score)); // connects label and int
-	scoreL.setBounds(100, 15, 200, 35); // sets location of score
+	scoreL.setText("Score: " + String.valueOf(score)); // connects label and int
+	scoreL.setBounds(25, 15, 200, 35); // sets location of score
 	scoreL.setFont(new Font("Courier New", Font.BOLD, 20)); // sets font and size of font
 	scoreL.setForeground(Color.GREEN); // sets color of Score
 	game_frame.add(scoreL); // adds score
@@ -42,8 +45,8 @@ public class Game_Screen {
 	//Timer//
 	int time = getTime();
 	JLabel timeL = new JLabel(); // label to hold time
-	timeL.setText(String.valueOf(time)); // connects label and int
-	timeL.setBounds(400, 15, 200,35); // set location of time
+	timeL.setText("Time: " + String.valueOf(time)); // connects label and int
+	timeL.setBounds(350, 15, 200,35); // set location of time
 	timeL.setFont(new Font("Courier New", Font.BOLD, 20)); // sets font and size of font
 	timeL.setForeground(Color.GREEN); // sets color
 	game_frame.add(timeL); // adds time
@@ -51,24 +54,32 @@ public class Game_Screen {
 	//Life//
 	int life = getLife(); // int to hold value of lives left
 	JLabel lifeL = new JLabel(); // label to hold life
-	lifeL.setText(String.valueOf(life)); // connects label and int
+	lifeL.setText("Lives: " + String.valueOf(life)); // connects label and int
 	lifeL.setBounds(700, 15, 200, 35); // sets location of life
 	lifeL.setFont(new Font("Courier New", Font.BOLD, 20)); // sets font and size of font
 	lifeL.setForeground(Color.GREEN); // sets color of life
 	game_frame.add(lifeL); // adds life	
 	
 	//Paddle//?
-
+	Paddle link = new Paddle(); // new paddle (link)
+	JLabel linkL = new JLabel(new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\Link.jpg")); // new paddle image(also link)
+	JPanel paddle = new JPanel(); // new Jpanel to hold the paddle object
+	link.resetLocation(); // paddles gets location reset
+	int paddleX = link.getX(); // stores x location of paddle
+	int paddleY = link.getY(); // stores y location of paddle
+	linkL.setBounds(paddleX, paddleY, 20, 30); // link image over the paddle
+	paddle.add(linkL); // Jpanel gets paddle
+	paddle.setVisible(true); // turns it visible
+	linkL.setVisible(true); // turns image visible
+	game_frame.add(paddle);
+	game_frame.add(linkL);
+	
 	
 	}// end of screen constructor
 	
 	
 	
-	//Main//
-	public static void main(String args[]){
-		Game_Screen gs = new Game_Screen();
-		gs.start();
-	}// end of main
+
 	
 	///Methods///
 	
@@ -94,43 +105,51 @@ public class Game_Screen {
 	// end of getters and setters
 	
 	//game loop//
-	public void start(){
-		timer.schedule(new gameLoop(), 0, 1000/60);
-	} // end of loop method
-	
 	private class gameLoop extends java.util.TimerTask{
 		public void run() {
 			if(!running) { // running is false
-				this.cancel(); // stop timer/loop
+				timer.cancel(); // stop timer/loop
 			} // end of if
 			else if(Life == 0){
 				JOptionPane.showMessageDialog(null, "Game Over");
-				this.cancel();
+				timer.cancel();
 			}// end of else if
 			else {
 			update();
 			redraw();
 			} // end of else
-			
-			
-			
 		}// end of run
 	} // end of gameLoop
 	
+		public void start(){
+		timer.schedule(new gameLoop(), 0, 1000/60);
+	} // end of loop method
+		
 	//updates anything needing an update//
 	private static void update() {
 		Time++;
-		
-		
-		
-		
 	} // end of update
 	
 	//redraws the screen//
 	private static void redraw() {
-		
-		
-		
+
 	} // end of redraw
+	
+	//PlaySound//
+	static void PlaySound(File sound) {
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(sound));
+			clip.start();
+			Thread.sleep(clip.getMicrosecondLength()/1000);
+		} catch(Exception e) {
+		}// end of try and catch
+	}// end of play sound
+	
+		//Main//
+	public static void main(String args[]){
+		Game_Screen gs = new Game_Screen();
+		gs.start();
+	}// end of main
 	
 }// end of class
