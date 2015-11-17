@@ -3,11 +3,9 @@ package Game;
 //Imports//
 import java.awt.*;
 import java.io.File;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-
 import java.util.Timer;
 
 public class Game_Screen {
@@ -19,18 +17,14 @@ public class Game_Screen {
 	static long Score = 0;
 	static int Life = 3;
 	static int Time;
-	Timer timer;
+	Timer timer = new Timer();
 	
 	//Constructor//
 	public Game_Screen() {
-	JFrame game_frame = new JFrame("Legend of Pong");
-	JLabel Background = new JLabel(new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\gameScreen.jpg"));
-	game_frame.setContentPane(Background);
-	game_frame.pack();
-	game_frame.setResizable(false);
-	game_frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	game_frame.setVisible(true);
-	
+	JFrame game_frame = new JFrame("Legend of Pong"); // creates the jframe
+	JLabel Background = new JLabel(new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\gameScreen.jpg")); // gets the BG image
+	game_frame.setContentPane(Background); // places background image
+
 	//setting the header section//
 	
 	//Score//
@@ -45,7 +39,7 @@ public class Game_Screen {
 	//Timer//
 	int time = getTime();
 	JLabel timeL = new JLabel(); // label to hold time
-	timeL.setText("Time: " + String.valueOf(time)); // connects label and int
+	timeL.setText("Time(sec): " + String.valueOf(time)); // connects label and int
 	timeL.setBounds(350, 15, 200,35); // set location of time
 	timeL.setFont(new Font("Courier New", Font.BOLD, 20)); // sets font and size of font
 	timeL.setForeground(Color.GREEN); // sets color
@@ -60,26 +54,33 @@ public class Game_Screen {
 	lifeL.setForeground(Color.GREEN); // sets color of life
 	game_frame.add(lifeL); // adds life	
 	
-	//Paddle//?
-	Paddle link = new Paddle(); // new paddle (link)
-	JLabel linkL = new JLabel(new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\Link.jpg")); // new paddle image(also link)
-	JPanel paddle = new JPanel(); // new Jpanel to hold the paddle object
-	link.resetLocation(); // paddles gets location reset
-	int paddleX = link.getX(); // stores x location of paddle
-	int paddleY = link.getY(); // stores y location of paddle
-	linkL.setBounds(paddleX, paddleY, 20, 30); // link image over the paddle
-	paddle.add(linkL); // Jpanel gets paddle
-	paddle.setVisible(true); // turns it visible
-	linkL.setVisible(true); // turns image visible
-	game_frame.add(paddle);
-	game_frame.add(linkL);
+	//Paddle//
+	JPanel paddle = new JPanel(); // new panel for paddle object and image
+	Paddle object = new Paddle(); // creates new paddle object
+	JLabel link = new JLabel(new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\Link.gif")); // new paddle image(also link)
+	paddle.add(object); // adds the actual object
+	paddle.add(link); // adds image to the paddle Panel
+	paddle.setBounds(object.getX(), object.getY(), object.getWidth(), object.getHeight()); // sets location and size of the paddle
+	game_frame.add(paddle); // game_frame gets link image
 	
+	// a single ball = test //
+	JPanel ball = new JPanel(); // creates the JPanel to hold the ball object and image
+	Ball obj = new Ball(); // creates the ball object
+	JLabel stone = new JLabel(new ImageIcon("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Pics\\Ball.png")); // creates the ball image
+	ball.add(obj); // adds the object
+	ball.add(stone); // adds the image
+	ball.setBounds(750, 250, obj.getWidth(), obj.getHeight()); // sets ball location and size
+	game_frame.add(ball); // adds it to the screen
+	
+	//final frame things//
+	game_frame.pack();
+	game_frame.setResizable(false);
+	game_frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	game_frame.setVisible(true);
 	
 	}// end of screen constructor
 	
 	
-	
-
 	
 	///Methods///
 	
@@ -107,17 +108,12 @@ public class Game_Screen {
 	//game loop//
 	private class gameLoop extends java.util.TimerTask{
 		public void run() {
-			if(!running) { // running is false
-				timer.cancel(); // stop timer/loop
-			} // end of if
-			else if(Life == 0){
-				JOptionPane.showMessageDialog(null, "Game Over");
-				timer.cancel();
-			}// end of else if
-			else {
 			update();
 			redraw();
-			} // end of else
+			
+			
+			
+			
 		}// end of run
 	} // end of gameLoop
 	
@@ -128,11 +124,13 @@ public class Game_Screen {
 	//updates anything needing an update//
 	private static void update() {
 		Time++;
+		
 	} // end of update
 	
 	//redraws the screen//
 	private static void redraw() {
-
+		
+		
 	} // end of redraw
 	
 	//PlaySound//
@@ -145,6 +143,7 @@ public class Game_Screen {
 		} catch(Exception e) {
 		}// end of try and catch
 	}// end of play sound
+	
 	
 		//Main//
 	public static void main(String args[]){

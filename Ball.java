@@ -1,6 +1,11 @@
 package Game;
 
-public class Ball {
+import java.awt.Component;
+
+public class Ball extends Component{
+	
+	private final int Height = 25;
+	private final int Width = 25;
 	
 	private int xdir,ydir,x,y;
 	
@@ -27,6 +32,18 @@ public class Ball {
         }// end of if
     } // end of move
 	
+	public int getHeight() {
+		return Height;
+	}// end of get height
+	public int getWidth() {
+		return Width;
+	}// end of get width
+	public int getX() {
+		return x;
+	}//end of get X
+	public int getY() {
+		return y;
+	}//end of get y
 	public void setXDir(int x) {
 		xdir = x;
 	} // end of setXDir
