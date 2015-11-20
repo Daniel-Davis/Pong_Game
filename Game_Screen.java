@@ -13,7 +13,7 @@ public class Game_Screen {
 	//Global Variables//
 	int ScreenHeight = 500;
 	int ScreenWidth = 800;
-	boolean running = true;
+	static boolean running = true;
 	static long Score = 0;
 	static int Life = 3;
 	static int Time;
@@ -110,10 +110,6 @@ public class Game_Screen {
 		public void run() {
 			update();
 			redraw();
-			
-			
-			
-			
 		}// end of run
 	} // end of gameLoop
 	
@@ -123,7 +119,11 @@ public class Game_Screen {
 		
 	//updates anything needing an update//
 	private static void update() {
+		final File sound = new File("C:\\Users\\Daniel\\workspace\\Pong_Game\\src\\resources\\Sounds\\pressStart.wav");
 		Time++;
+		if(Time == 100 ) { // test to prove loop
+			PlaySound(sound);
+		} // end of if
 		
 	} // end of update
 	
@@ -147,8 +147,12 @@ public class Game_Screen {
 	
 		//Main//
 	public static void main(String args[]){
-		Game_Screen gs = new Game_Screen();
-		gs.start();
+		Game_Screen gameScreen = new Game_Screen();
+		gameScreen.start();
+
+		
+		
 	}// end of main
 	
 }// end of class
+

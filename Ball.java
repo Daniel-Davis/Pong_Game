@@ -7,7 +7,7 @@ public class Ball extends Component{
 	private final int Height = 25;
 	private final int Width = 25;
 	
-	private int xdir,ydir,x,y;
+	private int xdir,ydir,x,y, score, life;
 	
 	//constructor//
 	public Ball() {
@@ -21,14 +21,19 @@ public class Ball extends Component{
         x = xdir;
         y = ydir;
 
-        if (x == 0) {
+        if (x == 0 + Width) { // if the ball hits the left edge of screen lose a life
             setXDir(1);
+            life = life -1;
         }// end of if
-        if (x == 800 - 8) {
+        if (x == 800 - Width) { // if ball hits the right edge of screen gain points
             setXDir(-1);
+            score = score + 25;
         }// end of if
-        if (y == 0) {
+        if (y == 0 + Height) { // if ball hits the top of screen just bounce
             setYDir(1);
+        }// end of if
+        if (y == 500 - Height) { // if ball hits the bottom of screen just bounce
+        	setYDir(-1);
         }// end of if
     } // end of move
 	

@@ -3,20 +3,11 @@ package Game;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-
 import java.io.File;
-import java.io.IOException;
 
-import  sun.audio.*;
-
-import java.io.*;
 
 
 public class Title_Screen {	
@@ -29,7 +20,7 @@ public class Title_Screen {
 				clip.start();
 				Thread.sleep(clip.getMicrosecondLength()/1000);
 			} catch(Exception e) {
-				System.out.print("File error");
+				System.out.print("Sound file error");
 			}// end of try and catch
 		}// end of play sound
 		
@@ -57,8 +48,8 @@ public class Title_Screen {
 		Play.addActionListener(new ActionListener() { // when Play button is pressed
 		    public void actionPerformed(ActionEvent e) {
 		    	PlaySound(pressStart);
-		    	Game_Screen.main(null); // calls main method of game_screen
 		    	title_frame.setVisible(false); // gets rid of the title screen
+		    	Game_Screen.main(null); // calls main method of game_screen
 		    }
 		});
 		JButton Exit = new JButton("Exit"); // creates exit button
@@ -78,7 +69,7 @@ public class Title_Screen {
 		Title.setBounds(325, 50, 300, 75); // creates label at location and with size
 		title_frame.add(Title); // adds title of game to the frame
 		Title.setFont(new Font("Courier New", Font.BOLD, 25)); // sets font and size of font
-		//Music// "C:/Users/Daniel/workspace/Pong_Game/src/resources/Sounds/Main_Menu.mp3"
+		//Music//
 		
 		
 		
